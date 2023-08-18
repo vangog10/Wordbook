@@ -1,14 +1,17 @@
+from functools import cache
 import json
 
 JSON = r'F:\Projects\PycharmProjects\wb\JSONs\setting.json'
 LANGUAGE_PACK = r'F:\Projects\PycharmProjects\wb\JSONs\languages\{}.json'
 
 
+@cache
 def dict_from_setting_json() -> dict:
     with open(JSON, 'r', encoding='utf8') as f:
         return json.load(f)
 
 
+@cache
 def dict_from_languages_json() -> dict:
     way = LANGUAGE_PACK.format(dict_from_setting_json()['language'])
     with open(way, 'r', encoding='utf8') as f:
