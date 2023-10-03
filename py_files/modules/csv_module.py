@@ -4,7 +4,7 @@ from random import sample
 import csv
 import os
 
-DIR = r'F:\Projects\PycharmProjects\wb\word_lists'
+DIR = r'F:\Projects\PycharmProjects\Wordbook\word_lists'
 P = r'{}\{}'
 list_file = []
 training_dict = defaultdict(str)
