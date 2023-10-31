@@ -2,6 +2,7 @@ from config import *
 from py_files.modules.json_module import *
 from py_files.modules.csv_module import *
 from py_files.modules.tts_module import *
+from py_files.modules.translate_module import *
 
 
 def setting_menu():
@@ -153,6 +154,14 @@ def about_program():
     window.close()
 
 
+def open_translator():
+    window = sg.Window('Translator', layout=layout['translator'], size=(600, 400))
+    while True:
+        event, value = window.read()
+        if event == sg.WIN_CLOSED:
+            break
+
+
 if __name__ == '__main__':
     sg.theme(dict_from_setting_json()['theme'])
     main_window = sg.Window('WordBook', layout['main_menu'], size=(400, 400))
@@ -173,4 +182,7 @@ if __name__ == '__main__':
             main_window.close()
             setting_menu()
             break
+        elif e == dict_from_languages_json()['Translator']:
+            main_window.close()
+            open_translator()
     main_window.close()

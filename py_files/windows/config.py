@@ -2,7 +2,6 @@ import PySimpleGUI as sg
 from py_files.modules.json_module import dict_from_setting_json, dict_from_languages_json
 from py_files.modules.csv_module import list_csv, list_file
 
-
 config: dict = {
     'theme_list': [
         'Black', 'BlueMono', 'BluePurple', 'BrightColors', 'BrownBlue', 'Dark', 'Dark2', 'DarkAmber', 'DarkBlack',
@@ -30,17 +29,34 @@ config: dict = {
         'Tan', 'TanBlue', 'TealMono', 'Topanga'
     ],
     'languages': ['ru', 'en'],
+    'languages_list': ['afrikaans', 'albanian', 'amharic', 'arabic', 'armenian', 'azerbaijani', 'basque', 'belarusian',
+                       'bengali', 'bosnian', 'bulgarian', 'catalan', 'cebuano', 'chichewa', 'chinese (simplified)',
+                       'chinese (traditional)', 'corsican', 'croatian', 'czech', 'danish', 'dutch', 'english',
+                       'esperanto',
+                       'estonian', 'filipino', 'finnish', 'french', 'frisian', 'galician', 'georgian', 'german',
+                       'greek',
+                       'gujarati', 'haitian creole', 'hausa', 'hawaiian', 'hebrew', 'hebrew', 'hindi', 'hmong',
+                       'hungarian',
+                       'icelandic', 'igbo', 'indonesian', 'irish', 'italian', 'japanese', 'javanese', 'kannada',
+                       'kazakh',
+                       'khmer', 'korean', 'kurdish (kurmanji)', 'kyrgyz', 'lao', 'latin', 'latvian', 'lithuanian',
+                       'luxembourgish', 'macedonian', 'malagasy', 'malay', 'malayalam', 'maltese', 'maori', 'marathi',
+                       'mongolian', 'myanmar (burmese)', 'nepali', 'norwegian', 'odia', 'pashto', 'persian', 'polish',
+                       'portuguese', 'punjabi', 'romanian', 'russian', 'samoan', 'scots gaelic', 'serbian', 'sesotho',
+                       'shona', 'sindhi', 'sinhala', 'slovak', 'slovenian', 'somali', 'spanish', 'sundanese', 'swahili',
+                       'swedish', 'tajik', 'tamil', 'telugu', 'thai', 'turkish', 'ukrainian', 'urdu', 'uyghur', 'uzbek',
+                       'vietnamese', 'welsh', 'xhosa', 'yiddish', 'yoruba', 'zulu']
 
 }
 
 sg.theme(dict_from_setting_json()['theme'])
 
 difficulty: dict[int:int] = {
-    1: 20,                      # very easy
-    2: 10,                       # easy
-    3: 5,                       # medium
-    4: 3,                       # hard
-    5: 2                        # very hard
+    1: 20,  # very easy
+    2: 10,  # easy
+    3: 5,  # medium
+    4: 3,  # hard
+    5: 2  # very hard
 }
 
 layout: dict = {
@@ -52,6 +68,8 @@ layout: dict = {
         [sg.Button(dict_from_languages_json()['+   Create new   +'], font=dict_from_setting_json()['font'],
                    expand_x=True, expand_y=True)],
         [sg.Button(dict_from_languages_json()['🛠    Settings    🛠'], font=dict_from_setting_json()['font'],
+                   expand_x=True, expand_y=True)],
+        [sg.Button(dict_from_languages_json()['Translator'], font=dict_from_setting_json()['font'],
                    expand_x=True, expand_y=True)]
     ],
     'settings': [
@@ -77,10 +95,13 @@ layout: dict = {
         [sg.OK(), sg.Cancel()]
     ],
     'file': [
-        [sg.Button(dict_from_languages_json()['+ Add new word'], font=["Times New Roman", 12]), sg.Button('🔁', font=["Times New Roman", 12]),
+        [sg.Button(dict_from_languages_json()['+ Add new word'], font=["Times New Roman", 12]),
+         sg.Button('🔁', font=["Times New Roman", 12]),
          sg.Button(dict_from_languages_json()['Learn'], font=["Times New Roman", 12])],
-        [sg.Table(headings=['   №  ', dict_from_languages_json()[' word '], dict_from_languages_json()[' translate '], dict_from_languages_json()[' progress ']],
-                  values=list_file, justification='left', key='-FILE-', num_rows=20, font=["Times New Roman", 12], enable_events=True)]
+        [sg.Table(headings=['   №  ', dict_from_languages_json()[' word '], dict_from_languages_json()[' translate '],
+                            dict_from_languages_json()[' progress ']],
+                  values=list_file, justification='left', key='-FILE-', num_rows=20, font=["Times New Roman", 12],
+                  enable_events=True)]
     ],
     'new_word': [
         [sg.Text(dict_from_languages_json()['word:']), sg.InputText(expand_x=True)],
@@ -88,8 +109,11 @@ layout: dict = {
         [sg.OK(), sg.Cancel()]
     ],
     'mod': [
-        [sg.Text(dict_from_languages_json()['mod']), sg.Combo(values=[dict_from_languages_json()['find translation'], dict_from_languages_json()['find word']], key='-MOD-')],
-        [sg.Text(dict_from_languages_json()['difficult']), sg.Slider(range=(1, 5), default_value=3, resolution=1, orientation='h', key='-DIFFICULTY-')],
+        [sg.Text(dict_from_languages_json()['mod']),
+         sg.Combo(values=[dict_from_languages_json()['find translation'], dict_from_languages_json()['find word']],
+                  key='-MOD-')],
+        [sg.Text(dict_from_languages_json()['difficult']),
+         sg.Slider(range=(1, 5), default_value=3, resolution=1, orientation='h', key='-DIFFICULTY-')],
         [sg.OK(), sg.Cancel()]
     ],
     'about_program': [
@@ -140,5 +164,12 @@ layout: dict = {
 
         )
         ]
+    ],
+    'translator': [
+        [sg.Combo(config['languages_list'], default_value='russian', expand_x=True, font=["Times New Roman", 12]), sg.Button('🔁', font=["Times New Roman", 16]),
+         sg.Combo(config['languages_list'], default_value='english', expand_x=True, font=["Times New Roman", 12])],
+        [sg.Input(font=["Times New Roman", 10], size=(100, 10))],
+        [],
+        []
     ]
 }
