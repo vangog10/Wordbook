@@ -1,8 +1,8 @@
 from functools import cache
 import json
 
-JSON = r'F:\Projects\PycharmProjects\wb\JSONs\setting.json'
-LANGUAGE_PACK = r'F:\Projects\PycharmProjects\wb\JSONs\languages\{}.json'
+JSON = r'F:\Projects\PycharmProjects\WordBook\JSONs\setting.json'
+LANGUAGE_PACK = r'F:\Projects\PycharmProjects\WordBook\JSONs\languages\{}.json'
 
 
 @cache
