@@ -6,7 +6,7 @@ from py_files.modules.translate_module import *
 
 
 def setting_menu():
-    window = sg.Window('Settings', layout['settings'], size=(450, 225))
+    window = sg.Window('Settings', layout['settings'], size=(450, 275))
 
     while True:
         event, values = window.read()
@@ -160,6 +160,8 @@ def open_translator():
         event, value = window.read()
         if event == sg.WIN_CLOSED:
             break
+        else:
+            print(event, value)
 
 
 if __name__ == '__main__':

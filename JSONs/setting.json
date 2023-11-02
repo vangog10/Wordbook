@@ -1,1 +1,10 @@
-{"font": ["Times New Roman", 20, "bold"], "theme": "Topanga", "language": "en"}
+{
+  "font": [
+    "Times New Roman",
+    20,
+    "bold"
+  ],
+  "theme": "DarkAmber",
+  "language": "en",
+  "cashe_size": "10"
+}

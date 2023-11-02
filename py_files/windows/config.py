@@ -80,6 +80,8 @@ layout: dict = {
          sg.Combo(config['languages'], default_value=dict_from_setting_json()['language'])],
         [sg.Text(dict_from_languages_json()['Font size'], font=('Times New Roman', 14, 'bold')),
          sg.Slider(range=(1, 5), default_value=3, resolution=0.5, orientation='h', key='-SLIDER-')],
+        [sg.Txt(dict_from_languages_json()['Cashe size:'], font=('Times New Roman', 14, 'bold')), sg.InputText(default_text='10', font=('Times New Roman', 14, 'bold'), s=(10, 14), key='-CASHE-'),
+         sg.Txt('MB', font=('Times New Roman', 14, 'bold')), sg.Button(dict_from_languages_json()['Clear'], font=('Times New Roman', 14, 'bold'), expand_x=True)],
         [sg.Button(dict_from_languages_json()['About program'], size=(15, 2), expand_x=True)],
         [sg.OK(size=(10, 2)), sg.Cancel(size=(10, 2))]
     ],
@@ -166,12 +168,21 @@ layout: dict = {
         ]
     ],
     'translator': [
-        [sg.Combo(config['languages_list'], default_value='russian', expand_x=True, font=["Times New Roman", 12]), sg.Button('🔁', font=["Times New Roman", 16]),
-         sg.Combo(config['languages_list'], default_value='english', expand_x=True, font=["Times New Roman", 12])],
-        [sg.InputText(font=["Times New Roman", 7], expand_x=True), sg.Button('→', font=["Times New Roman", 16]),
-         sg.InputText(font=["Times New Roman", 7], expand_x=True)],
-        [sg.Btn('🔊', font=["Times New Roman", 16]), sg.Txt('              ', font=["Times New Roman", 16], expand_x=True),
-         sg.Btn('🔊', font=["Times New Roman", 16]), sg.Txt('   ', font=["Times New Roman", 16], expand_x=True)],
-        []
+        [sg.Combo(config['languages_list'], default_value='russian', expand_x=True, font=["Times New Roman", 12], key='-L1-'), sg.Button('🔁', font=["Times New Roman", 16]),
+         sg.Combo(config['languages_list'], default_value='english', expand_x=True, font=["Times New Roman", 12], key='-L2-')],
+        [sg.InputText(font=["Times New Roman", 16], s=(23, 16), key='-T1-'), sg.Button('→', font=["Times New Roman", 16]),
+         sg.InputText(font=["Times New Roman", 16], s=(23, 16), key='-T2-')],
+        [sg.Btn('🔊', font=["Times New Roman", 16]), sg.Txt('              ', font=["Times New Roman", 16], expand_x=True, key='-S1-'),
+         sg.Btn('🔊', font=["Times New Roman", 16]), sg.Txt('   ', font=["Times New Roman", 16], expand_x=True, key='-S2-')],
+        [sg.Txt('   ', font=["Times New Roman", 16], expand_y=True)],
+        [
+            sg.Txt('   ', font=["Times New Roman", 20], expand_x=True),
+            sg.Btn('🎤', font=["Times New Roman", 20]),
+            sg.Txt(' ', font=["Times New Roman", 20], expand_x=True),
+            sg.Btn('🕒', font=["Times New Roman", 20]),
+            sg.Txt(' ', font=["Times New Roman", 20], expand_x=True),
+            sg.Btn(' + ', font=["Times New Roman",  20, 'bold']),
+            sg.Txt('   ', font=["Times New Roman", 20], expand_x=True)],
+        [sg.Txt('   ', font=["Times New Roman", 16], expand_y=True)]
     ]
 }

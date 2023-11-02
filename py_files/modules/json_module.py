@@ -27,6 +27,7 @@ def change_setting(changes: dict) -> None:
         ],
         "theme": changes[0],
         "language": changes[1],
+        "cashe_size": changes['-CASHE-']
     }
     with open(JSON, 'w', encoding='utf8') as f:
         json.dump(data_for_json, f)
