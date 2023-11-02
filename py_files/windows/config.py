@@ -168,8 +168,10 @@ layout: dict = {
     'translator': [
         [sg.Combo(config['languages_list'], default_value='russian', expand_x=True, font=["Times New Roman", 12]), sg.Button('🔁', font=["Times New Roman", 16]),
          sg.Combo(config['languages_list'], default_value='english', expand_x=True, font=["Times New Roman", 12])],
-        [sg.Input(font=["Times New Roman", 10], size=(100, 10))],
-        [],
+        [sg.InputText(font=["Times New Roman", 7], expand_x=True), sg.Button('→', font=["Times New Roman", 16]),
+         sg.InputText(font=["Times New Roman", 7], expand_x=True)],
+        [sg.Btn('🔊', font=["Times New Roman", 16]), sg.Txt('              ', font=["Times New Roman", 16], expand_x=True),
+         sg.Btn('🔊', font=["Times New Roman", 16]), sg.Txt('   ', font=["Times New Roman", 16], expand_x=True)],
         []
     ]
 }
