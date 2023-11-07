@@ -154,14 +154,44 @@ def about_program():
     window.close()
 
 
+def open_history():
+    window = sg.Window('History', layout=layout['history'], size=(400, 400))
+    while True:
+        event, value = window.read()
+        if event == sg.WIN_CLOSED:
+            break
+    window.close()
+
+
+def add_word_from_translator_window(word, translate):
+    laout = [
+        [sg.Text(dict_from_languages_json()['word:']), sg.InputText(expand_x=True)],
+        [sg.Text(dict_from_languages_json()['translation:']), sg.InputText(expand_x=True)],
+        [sg.Txt(dict_from_languages_json()['list:'])],
+        [sg.OK(), sg.Cancel()]
+    ]
+    window = sg.Window(' + add word', layout=laout)
+
+
 def open_translator():
     window = sg.Window('Translator', layout=layout['translator'], size=(600, 400))
     while True:
         event, value = window.read()
         if event == sg.WIN_CLOSED:
             break
+        elif event == '🕒':
+            open_history()
+        elif event == '→':
+            # TODO: проверить с интернетом
+            translate_ = translate_operation(text=window['-T1-'], lang1=window['-L1-'], lang2=window['-L2-'])
+            window['-T2-'].update(translate_)
+            update_history(window['-T1-'], translate_, window['-L1-'], window['-L2-'])
+        elif event == '+':
+            pass
+            # add_word_from_translator_window()
         else:
             print(event, value)
+    window.close()
 
 
 if __name__ == '__main__':
@@ -188,3 +218,7 @@ if __name__ == '__main__':
             main_window.close()
             open_translator()
     main_window.close()
+
+
+# TODO: допилить локализацию
+# TODO: оптимизировать пути

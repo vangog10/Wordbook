@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 from py_files.modules.json_module import dict_from_setting_json, dict_from_languages_json
-from py_files.modules.csv_module import list_csv, list_file
+from py_files.modules.csv_module import list_csv, list_file, get_history
 
 config: dict = {
     'theme_list': [
@@ -170,8 +170,8 @@ layout: dict = {
     'translator': [
         [sg.Combo(config['languages_list'], default_value='russian', expand_x=True, font=["Times New Roman", 12], key='-L1-'), sg.Button('🔁', font=["Times New Roman", 16]),
          sg.Combo(config['languages_list'], default_value='english', expand_x=True, font=["Times New Roman", 12], key='-L2-')],
-        [sg.InputText(font=["Times New Roman", 16], s=(23, 16), key='-T1-'), sg.Button('→', font=["Times New Roman", 16]),
-         sg.InputText(font=["Times New Roman", 16], s=(23, 16), key='-T2-')],
+        [sg.InputText(default_text='', font=["Times New Roman", 16], s=(23, 16), key='-T1-'), sg.Button('→', font=["Times New Roman", 16]),
+         sg.InputText(default_text='', font=["Times New Roman", 16], s=(23, 16), key='-T2-')],
         [sg.Btn('🔊', font=["Times New Roman", 16]), sg.Txt('              ', font=["Times New Roman", 16], expand_x=True, key='-S1-'),
          sg.Btn('🔊', font=["Times New Roman", 16]), sg.Txt('   ', font=["Times New Roman", 16], expand_x=True, key='-S2-')],
         [sg.Txt('   ', font=["Times New Roman", 16], expand_y=True)],
@@ -184,5 +184,9 @@ layout: dict = {
             sg.Btn(' + ', font=["Times New Roman",  20, 'bold']),
             sg.Txt('   ', font=["Times New Roman", 20], expand_x=True)],
         [sg.Txt('   ', font=["Times New Roman", 16], expand_y=True)]
-    ]
+    ],
+    'history': [
+        [sg.Table(values=get_history(), headings=[dict_from_languages_json()['word->transl.'], dict_from_languages_json()['lang->lang']],
+                  justification='center', expand_x=True, expand_y=True)]
+    ],
 }
