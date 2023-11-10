@@ -111,7 +111,7 @@ LANG = {
 
 def translate_operation(text, lang1, lang2) -> str:
     translator = Translator()
-    print(lang1)
+
     return translator.translate(text=text, src=LANG[lang1], dest=LANG[lang2]).text
 
 

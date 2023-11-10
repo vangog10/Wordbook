@@ -130,6 +130,6 @@ def get_history():
 
 def update_history(word, translate, word_lang, translate_lang):
     if not word == '':
-        with open('F:/Projects/PycharmProjects/WordBook/other/history.csv', 'w', encoding='utf-8', newline='') as f:
+        with open('F:/Projects/PycharmProjects/WordBook/other/history.csv', 'a', encoding='utf-8', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=['word', 'traslate', 'word_lang', 'translate_lang'])
             writer.writerow({'word': word, 'traslate': translate, 'word_lang': word_lang, 'translate_lang': translate_lang})

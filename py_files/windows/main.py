@@ -183,9 +183,9 @@ def open_translator():
             open_history()
         elif event == '→':
             # TODO: проверить с интернетом
-            translate_ = translate_operation(text=window['-T1-'], lang1=window['-L1-'], lang2=window['-L2-'])
+            translate_ = translate_operation(text=value['-T1-'], lang1=value['-L1-'], lang2=value['-L2-'])
             window['-T2-'].update(translate_)
-            update_history(window['-T1-'], translate_, window['-L1-'], window['-L2-'])
+            update_history(value['-T1-'], translate_, value['-L1-'], value['-L2-'])
         elif event == '+':
             pass
             # add_word_from_translator_window()
