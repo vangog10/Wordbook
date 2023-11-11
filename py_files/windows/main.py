@@ -3,6 +3,7 @@ from py_files.modules.json_module import *
 from py_files.modules.csv_module import *
 from py_files.modules.tts_module import *
 from py_files.modules.translate_module import *
+from py_files.modules.cashe_module import remove_cache
 
 
 def setting_menu():
@@ -74,6 +75,7 @@ def open_file_window(number_of_file):
                 speak(list_file[values['-FILE-'][0]][1].strip())
             except IndexError:
                 pass
+            remove_cache()
     window.close()
 
 
@@ -91,7 +93,7 @@ def add_word_window(name_f):
 
 
 def choose_mod(name_f):
-    window = sg.Window('select mod', layout['mod'])
+    window = sg.Window(dict_from_languages_json()['select mod'], layout['mod'])
 
     while True:
         event, value = window.read()
@@ -146,7 +148,7 @@ def train(diff):
 
 
 def about_program():
-    window = sg.Window('About', layout=layout['about_program'], size=(850, 400))
+    window = sg.Window(dict_from_languages_json['About'], layout=layout['about_program'], size=(850, 400))
     while True:
         event, value = window.read()
         if event == sg.WIN_CLOSED:
@@ -155,7 +157,7 @@ def about_program():
 
 
 def open_history():
-    window = sg.Window('History', layout=layout['history'], size=(400, 400))
+    window = sg.Window(dict_from_languages_json()['History'], layout=layout['history'], size=(400, 400))
     while True:
         event, value = window.read()
         if event == sg.WIN_CLOSED:

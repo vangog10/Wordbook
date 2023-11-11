@@ -81,7 +81,7 @@ layout: dict = {
         [sg.Text(dict_from_languages_json()['Font size'], font=('Times New Roman', 14, 'bold')),
          sg.Slider(range=(1, 5), default_value=3, resolution=0.5, orientation='h', key='-SLIDER-')],
         [sg.Txt(dict_from_languages_json()['Cashe size:'], font=('Times New Roman', 14, 'bold')), sg.InputText(default_text='10', font=('Times New Roman', 14, 'bold'), s=(10, 14), key='-CASHE-'),
-         sg.Txt('MB', font=('Times New Roman', 14, 'bold')), sg.Button(dict_from_languages_json()['Clear'], font=('Times New Roman', 14, 'bold'), expand_x=True)],
+         sg.Txt(dict_from_languages_json()['Bytes'], font=('Times New Roman', 14, 'bold')), sg.Button(dict_from_languages_json()['Clear'], font=('Times New Roman', 14, 'bold'), expand_x=True)],
         [sg.Button(dict_from_languages_json()['About program'], size=(15, 2), expand_x=True)],
         [sg.OK(size=(10, 2)), sg.Cancel(size=(10, 2))]
     ],
