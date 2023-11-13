@@ -4,6 +4,7 @@ from random import sample
 import csv
 import os
 
+
 DIR = 'F:/Projects/PycharmProjects/WordBook/word_lists'
 P = '{}/{}'
 list_file = []
