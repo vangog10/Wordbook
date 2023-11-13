@@ -7,7 +7,7 @@ from py_files.modules.cashe_module import remove_cache
 
 
 def setting_menu():
-    window = sg.Window('Settings', layout['settings'], size=(450, 275))
+    window = sg.Window(dict_from_languages_json()['Settings'], layout['settings'], size=(450, 275))
 
     while True:
         event, values = window.read()
@@ -148,7 +148,7 @@ def train(diff):
 
 
 def about_program():
-    window = sg.Window(dict_from_languages_json['About'], layout=layout['about_program'], size=(850, 400))
+    window = sg.Window(dict_from_languages_json()['About'], layout=layout['about_program'], size=(850, 400))
     while True:
         event, value = window.read()
         if event == sg.WIN_CLOSED:
@@ -184,7 +184,6 @@ def open_translator():
         elif event == '🕒':
             open_history()
         elif event == '→':
-            # TODO: проверить с интернетом
             translate_ = translate_operation(text=value['-T1-'], lang1=value['-L1-'], lang2=value['-L2-'])
             window['-T2-'].update(translate_)
             update_history(value['-T1-'], translate_, value['-L1-'], value['-L2-'])
@@ -198,7 +197,7 @@ def open_translator():
 
 if __name__ == '__main__':
     sg.theme(dict_from_setting_json()['theme'])
-    main_window = sg.Window('WordBook', layout['main_menu'], size=(400, 400))
+    main_window = sg.Window(dict_from_languages_json()['WordBook'], layout['main_menu'], size=(400, 400))
 
     while True:
         e, v = main_window.read()

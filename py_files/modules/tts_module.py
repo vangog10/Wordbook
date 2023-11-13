@@ -1,4 +1,5 @@
 from gtts import gTTS
+import speech_recognition as sr
 import os
 
 
@@ -121,3 +122,5 @@ def speak(word: str, lang='en'):
     os.system(f'afplay {MP3_PATH.format(word)}')
 
 
+def listen():
+    pass
