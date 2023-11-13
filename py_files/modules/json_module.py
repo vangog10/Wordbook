@@ -1,8 +1,9 @@
 from functools import cache
 import json
 
-JSON = r'F:\Projects\PycharmProjects\Wordbook\JSONs\setting.json'
-LANGUAGE_PACK = r'F:\Projects\PycharmProjects\Wordbook\JSONs\languages\{}.json'
+
+JSON = r'F:\Projects\PycharmProjects\WordBook\JSONs\setting.json'
+LANGUAGE_PACK = r'F:\Projects\PycharmProjects\WordBook\JSONs\languages\{}.json'
 
 
 @cache
@@ -27,6 +28,7 @@ def change_setting(changes: dict) -> None:
         ],
         "theme": changes[0],
         "language": changes[1],
+        "cashe_size": changes['-CASHE-']
     }
     with open(JSON, 'w', encoding='utf8') as f:
         json.dump(data_for_json, f)

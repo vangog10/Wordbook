@@ -2,10 +2,12 @@ from config import *
 from py_files.modules.json_module import *
 from py_files.modules.csv_module import *
 from py_files.modules.tts_module import *
+from py_files.modules.translate_module import *
+from py_files.modules.cashe_module import remove_cache
 
 
 def setting_menu():
-    window = sg.Window('Settings', layout['settings'], size=(450, 225))
+    window = sg.Window(dict_from_languages_json()['Settings'], layout['settings'], size=(450, 275))
 
     while True:
         event, values = window.read()
@@ -73,6 +75,7 @@ def open_file_window(number_of_file):
                 speak(list_file[values['-FILE-'][0]][1].strip())
             except IndexError:
                 pass
+            remove_cache()
     window.close()
 
 
@@ -90,7 +93,7 @@ def add_word_window(name_f):
 
 
 def choose_mod(name_f):
-    window = sg.Window('select mod', layout['mod'])
+    window = sg.Window(dict_from_languages_json()['select mod'], layout['mod'])
 
     while True:
         event, value = window.read()
@@ -145,7 +148,7 @@ def train(diff):
 
 
 def about_program():
-    window = sg.Window('About', layout=layout['about_program'], size=(850, 400))
+    window = sg.Window(dict_from_languages_json()['About'], layout=layout['about_program'], size=(850, 400))
     while True:
         event, value = window.read()
         if event == sg.WIN_CLOSED:
@@ -153,9 +156,48 @@ def about_program():
     window.close()
 
 
+def open_history():
+    window = sg.Window(dict_from_languages_json()['History'], layout=layout['history'], size=(400, 400))
+    while True:
+        event, value = window.read()
+        if event == sg.WIN_CLOSED:
+            break
+    window.close()
+
+
+def add_word_from_translator_window(word, translate):
+    laout = [
+        [sg.Text(dict_from_languages_json()['word:']), sg.InputText(expand_x=True)],
+        [sg.Text(dict_from_languages_json()['translation:']), sg.InputText(expand_x=True)],
+        [sg.Txt(dict_from_languages_json()['list:'])],
+        [sg.OK(), sg.Cancel()]
+    ]
+    window = sg.Window(' + add word', layout=laout)
+
+
+def open_translator():
+    window = sg.Window('Translator', layout=layout['translator'], size=(600, 400))
+    while True:
+        event, value = window.read()
+        if event == sg.WIN_CLOSED:
+            break
+        elif event == '🕒':
+            open_history()
+        elif event == '→':
+            translate_ = translate_operation(text=value['-T1-'], lang1=value['-L1-'], lang2=value['-L2-'])
+            window['-T2-'].update(translate_)
+            update_history(value['-T1-'], translate_, value['-L1-'], value['-L2-'])
+        elif event == '+':
+            pass
+            # add_word_from_translator_window()
+        else:
+            print(event, value)
+    window.close()
+
+
 if __name__ == '__main__':
     sg.theme(dict_from_setting_json()['theme'])
-    main_window = sg.Window('WordBook', layout['main_menu'], size=(400, 400))
+    main_window = sg.Window(dict_from_languages_json()['WordBook'], layout['main_menu'], size=(400, 400))
 
     while True:
         e, v = main_window.read()
@@ -173,4 +215,11 @@ if __name__ == '__main__':
             main_window.close()
             setting_menu()
             break
+        elif e == dict_from_languages_json()['Translator']:
+            main_window.close()
+            open_translator()
     main_window.close()
+
+
+# TODO: допилить локализацию
+# TODO: оптимизировать пути

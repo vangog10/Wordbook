@@ -4,8 +4,9 @@ from random import sample
 import csv
 import os
 
-DIR = r'F:\Projects\PycharmProjects\Wordbook\word_lists'
-P = r'{}\{}'
+
+DIR = 'F:/Projects/PycharmProjects/WordBook/word_lists'
+P = '{}/{}'
 list_file = []
 training_dict = defaultdict(str)
 steak = deque()
@@ -116,3 +117,20 @@ def change_progress():
         for row in t:
             writer.writerow(row)
 
+
+def get_history():
+    t = []
+    with open('F:/Projects/PycharmProjects/WordBook/other/history.csv', 'r', encoding='utf-8') as f:
+        rows = csv.DictReader(f)
+
+        for i in rows:
+            t.append([f'{i["word"]}->{i["traslate"]}', f'{i["word_lang"]}->{i["translate_lang"]}'])
+
+    return t
+
+
+def update_history(word, translate, word_lang, translate_lang):
+    if not word == '':
+        with open('F:/Projects/PycharmProjects/WordBook/other/history.csv', 'a', encoding='utf-8', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=['word', 'traslate', 'word_lang', 'translate_lang'])
+            writer.writerow({'word': word, 'traslate': translate, 'word_lang': word_lang, 'translate_lang': translate_lang})

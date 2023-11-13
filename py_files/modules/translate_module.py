@@ -1,10 +1,5 @@
-from gtts import gTTS
-import speech_recognition as sr
-import os
+from googletrans import Translator
 
-
-CASHE = {}
-MP3_PATH = 'F:/Projects/PycharmProjects/WordBook/mp3_cashe/{}.mp3'
 LANG = {
     'afrikaans': 'af',
     'albanian': 'sq',
@@ -114,13 +109,9 @@ LANG = {
 }
 
 
-def speak(word: str, lang='en'):
-    if word not in CASHE:
-        tts = gTTS(word, lang=lang)
-        tts.save(MP3_PATH.format(word))
-        CASHE[word] = MP3_PATH.format(word)
-    os.system(f'afplay {MP3_PATH.format(word)}')
+def translate_operation(text, lang1, lang2) -> str:
+    translator = Translator()
+
+    return translator.translate(text=text, src=LANG[lang1], dest=LANG[lang2]).text
 
 
-def listen():
-    pass
