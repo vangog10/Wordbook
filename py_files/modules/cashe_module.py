@@ -1,4 +1,4 @@
-from json_module import dict_from_setting_json
+from py_files.modules.json_module import dict_from_setting_json
 import csv
 import os
 
@@ -7,7 +7,7 @@ H_PATH = 'F:/Projects/PycharmProjects/WordBook/other/history.csv'
 
 
 def check_number_of_cache():
-    if os.path.getsize(C_PATH) + os.path.getsize(H_PATH) > dict_from_setting_json()['cashe_size']:
+    if os.path.getsize(C_PATH) + os.path.getsize(H_PATH) > int(dict_from_setting_json()['cashe_size']):
         return True
     return False
 
@@ -28,6 +28,4 @@ def clear_histrory():
         with open(H_PATH, 'w', encoding='utf-8', newline='') as f:
             w = csv.DictWriter(f, fieldnames=['word', 'traslate', 'word_lang', 'translate_lang'])
             w.writeheader()
-
-
 

@@ -43,5 +43,10 @@
   "\uD83D\uDEE0    Settings    \uD83D\uDEE0": "\uD83D\uDEE0    Settings    \uD83D\uDEE0",
   "Bytes": "Bytes",
   "select mod": "select mod",
-  "About": "About"
+  "About": "About",
+  "list:": "list:",
+  "match words": "match words",
+  "write word": "write word",
+  "write translation": "write translation",
+  "word from audio": "word from audio"
 }

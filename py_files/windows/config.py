@@ -74,13 +74,14 @@ layout: dict = {
     ],
     'settings': [
         [sg.Text(dict_from_languages_json()['Settings'], font=dict_from_setting_json()['font'], expand_x=True)],
+
         [sg.Text(dict_from_languages_json()['Theme:'], font=('Times New Roman', 14, 'bold')),
          sg.Combo(config['theme_list'], default_value=dict_from_setting_json()['theme']),
          sg.Text(dict_from_languages_json()['language:'], font=('Times New Roman', 14, 'bold')),
          sg.Combo(config['languages'], default_value=dict_from_setting_json()['language'])],
         [sg.Text(dict_from_languages_json()['Font size'], font=('Times New Roman', 14, 'bold')),
          sg.Slider(range=(1, 5), default_value=3, resolution=0.5, orientation='h', key='-SLIDER-')],
-        [sg.Txt(dict_from_languages_json()['Cashe size:'], font=('Times New Roman', 14, 'bold')), sg.InputText(default_text='10', font=('Times New Roman', 14, 'bold'), s=(10, 14), key='-CASHE-'),
+        [sg.Txt(dict_from_languages_json()['Cashe size:'], font=('Times New Roman', 14, 'bold')), sg.InputText(default_text=dict_from_setting_json()['cashe_size'], font=('Times New Roman', 14, 'bold'), s=(10, 14), key='-CASHE-'),
          sg.Txt(dict_from_languages_json()['Bytes'], font=('Times New Roman', 14, 'bold')), sg.Button(dict_from_languages_json()['Clear'], font=('Times New Roman', 14, 'bold'), expand_x=True)],
         [sg.Button(dict_from_languages_json()['About program'], size=(15, 2), expand_x=True)],
         [sg.OK(size=(10, 2)), sg.Cancel(size=(10, 2))]
@@ -112,7 +113,9 @@ layout: dict = {
     ],
     'mod': [
         [sg.Text(dict_from_languages_json()['mod']),
-         sg.Combo(values=[dict_from_languages_json()['find translation'], dict_from_languages_json()['find word']],
+         sg.Combo(values=[dict_from_languages_json()['find translation'], dict_from_languages_json()['find word'],
+                          dict_from_languages_json()['match words'], dict_from_languages_json()['write word'],
+                          dict_from_languages_json()['write translation'], dict_from_languages_json()['word from audio']],
                   key='-MOD-')],
         [sg.Text(dict_from_languages_json()['difficult']),
          sg.Slider(range=(1, 5), default_value=3, resolution=1, orientation='h', key='-DIFFICULTY-')],

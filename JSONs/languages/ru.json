@@ -43,5 +43,11 @@
   "\uD83D\uDEE0    Settings    \uD83D\uDEE0": "\uD83D\uDEE0    Настройки    \uD83D\uDEE0",
   "Bytes": "Байт",
   "select mod": "сложность",
-  "About": "О программе"
+  "About": "О программе",
+  "list:": "словарь:",
+  "match words": "соедени слова",
+  "write word": "написать слово",
+  "write translation": "написать перевод",
+  "word from audio": "слово на слух",
+  "Translator": "Переводчик"
 }

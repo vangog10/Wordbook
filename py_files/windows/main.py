@@ -75,7 +75,7 @@ def open_file_window(number_of_file):
                 speak(list_file[values['-FILE-'][0]][1].strip())
             except IndexError:
                 pass
-            remove_cache()
+            # remove_cache()
     window.close()
 
 
@@ -100,13 +100,22 @@ def choose_mod(name_f):
         if event == sg.WIN_CLOSED or event == 'Cancel':
             break
         elif event == 'OK':
-            create_training_dict(value['-MOD-'], name_f)
+            if value['-MOD-'] in ('find translation', 'find word'):
+                create_training_dict(value['-MOD-'], name_f)
+                window.close()
+                train_through_words(value['-DIFFICULTY-'])
+            elif value['-MOD-'] == 'match words':
+                pass
+            elif value['-MOD-'] in ('write word', 'write translation'):
+                create_training_dict(value['-MOD-'], name_f)
+                window.close()
+                writing_train(value['-DIFFICULTY-'])
+            elif value['-MOD-'] == 'word from audio':
+                pass
             break
-    window.close()
-    train(value['-DIFFICULTY-'])
 
 
-def train(diff):
+def train_through_words(diff):
     fill_steak()
     txt, btns = steak.popleft()
     delta = difficulty[diff]
@@ -114,12 +123,18 @@ def train(diff):
         [sg.Text(text='', font=("Times New Roman", 35, "bold"))],
         [sg.Text(text=f'{txt.zfill(22).replace("0", " ")}', font=("Times New Roman", 35, "bold"), key='--TXT--')],
         [sg.Text(text='', font=("Times New Roman", 35, "bold"))],
-        [sg.Button(button_text=btns[0], button_color='gray', expand_x=True, expand_y=True, key='--B1--', font=("Times New Roman", 20, "bold")),
-         sg.Button(button_text=btns[1], button_color='gray', expand_x=True, expand_y=True, key='--B2--', font=("Times New Roman", 20, "bold"))],
-        [sg.Button(button_text=btns[2], button_color='gray', expand_x=True, expand_y=True, key='--B3--', font=("Times New Roman", 20, "bold")),
-         sg.Button(button_text=btns[3], button_color='gray', expand_x=True, expand_y=True, key='--B4--', font=("Times New Roman", 20, "bold"))],
-        [sg.Button(button_text=dict_from_languages_json()['continue ⏩'], expand_x=True, expand_y=True, font=("Times New Roman", 20, "bold")),
-         sg.Button(button_text=dict_from_languages_json()['finish train'], expand_x=True, expand_y=True, font=("Times New Roman", 20, "bold"))]
+        [sg.Button(button_text=btns[0], button_color='gray', expand_x=True, expand_y=True, key='--B1--',
+                   font=("Times New Roman", 20, "bold")),
+         sg.Button(button_text=btns[1], button_color='gray', expand_x=True, expand_y=True, key='--B2--',
+                   font=("Times New Roman", 20, "bold"))],
+        [sg.Button(button_text=btns[2], button_color='gray', expand_x=True, expand_y=True, key='--B3--',
+                   font=("Times New Roman", 20, "bold")),
+         sg.Button(button_text=btns[3], button_color='gray', expand_x=True, expand_y=True, key='--B4--',
+                   font=("Times New Roman", 20, "bold"))],
+        [sg.Button(button_text=dict_from_languages_json()['continue ⏩'], expand_x=True, expand_y=True,
+                   font=("Times New Roman", 20, "bold")),
+         sg.Button(button_text=dict_from_languages_json()['finish train'], expand_x=True, expand_y=True,
+                   font=("Times New Roman", 20, "bold"))]
     ]
     window = sg.Window('training...', layout=train_layout, size=(540, 400))
 
@@ -147,6 +162,10 @@ def train(diff):
     change_progress()
 
 
+def writing_train(diff):
+    pass
+
+
 def about_program():
     window = sg.Window(dict_from_languages_json()['About'], layout=layout['about_program'], size=(850, 400))
     while True:
@@ -167,12 +186,16 @@ def open_history():
 
 def add_word_from_translator_window(word, translate):
     laout = [
-        [sg.Text(dict_from_languages_json()['word:']), sg.InputText(expand_x=True)],
-        [sg.Text(dict_from_languages_json()['translation:']), sg.InputText(expand_x=True)],
-        [sg.Txt(dict_from_languages_json()['list:'])],
+        [sg.Text(dict_from_languages_json()['word:']), sg.InputText(expand_x=True, default_text=word)],
+        [sg.Text(dict_from_languages_json()['translation:']), sg.InputText(expand_x=True, default_text=translate)],
+        [sg.Txt(dict_from_languages_json()['list:']), sg.Combo(default_value='', values=os.listdir(DIR))],
         [sg.OK(), sg.Cancel()]
     ]
     window = sg.Window(' + add word', layout=laout)
+    while True:
+        event, value = window.read()
+        if event == sg.WIN_CLOSED:
+            break
 
 
 def open_translator():
@@ -187,9 +210,14 @@ def open_translator():
             translate_ = translate_operation(text=value['-T1-'], lang1=value['-L1-'], lang2=value['-L2-'])
             window['-T2-'].update(translate_)
             update_history(value['-T1-'], translate_, value['-L1-'], value['-L2-'])
-        elif event == '+':
-            pass
-            # add_word_from_translator_window()
+        elif event == ' + ':
+            add_word_from_translator_window(word=value['-T1-'], translate=value['-T2-'])
+        elif event == '🔊':
+            speak(word=value['-T1-'], lang=value['-L1-'])
+            # remove_cache()
+        elif event == '🔊0':
+            speak(word=value['-T2-'], lang=value['-L2-'])
+            # remove_cache()
         else:
             print(event, value)
     window.close()
@@ -219,7 +247,3 @@ if __name__ == '__main__':
             main_window.close()
             open_translator()
     main_window.close()
-
-
-# TODO: допилить локализацию
-# TODO: оптимизировать пути

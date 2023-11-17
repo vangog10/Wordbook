@@ -1,6 +1,5 @@
 from gtts import gTTS
-import speech_recognition as sr
-import os
+from playsound import playsound
 
 
 CASHE = {}
@@ -114,12 +113,12 @@ LANG = {
 }
 
 
-def speak(word: str, lang='en'):
+def speak(word: str, lang='english'):
     if word not in CASHE:
-        tts = gTTS(word, lang=lang)
+        tts = gTTS(word, lang=LANG[lang])
         tts.save(MP3_PATH.format(word))
         CASHE[word] = MP3_PATH.format(word)
-    os.system(f'afplay {MP3_PATH.format(word)}')
+    playsound(MP3_PATH.format(word))
 
 
 def listen():
